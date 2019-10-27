@@ -1,0 +1,33 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+
+# Complete the checkMagazine function below.
+def checkMagazine(magazine, note):
+    u = Counter(note)- Counter(magazine) == {}  #Enumera el número de palabras de la nota y de magazine, 
+                                                #Al restar note - magazine; no hay numeros negativos, por lo tanto quedará vacio o con elementos
+                                                # si esta vacío devolvera True, si esta falso devolvera False
+    if u:
+        return print("Yes")                     #True = yes
+    else:                                           
+        return print("No")                      #False = No
+
+
+if __name__ == '__main__':
+    mn = input().split()
+
+    m = int(mn[0])
+
+    n = int(mn[1])
+
+    magazine = input().rstrip().split()
+
+    note = input().rstrip().split()
+
+    checkMagazine(magazine, note)
