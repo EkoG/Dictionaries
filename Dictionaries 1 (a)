@@ -1,0 +1,36 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+
+# Complete the checkMagazine function below.
+def checkMagazine(magazine, note):
+    D = {}
+    for i in magazine:
+        if  i in D:              #Puedes revisar si existe un elemento en el diccionario, PERO MARCARÁ ERROR EN EL SI TRATAS DE ACCEDER A ALGO QUE NO EXISTE
+           D[i] += 1
+        else:
+            D[i] = 1
+    for j in note:
+        if j not in D or D[j] == 0: #Si no esta o estuvo, pero fue devuelto a Cero, marcará que no puede ser realiaado
+            return print("No")
+        D[j] -= 1
+    return(print("Yes"))
+
+if __name__ == '__main__':
+    mn = input().split()
+
+    m = int(mn[0])
+
+    n = int(mn[1])
+
+    magazine = input().rstrip().split()
+
+    note = input().rstrip().split()
+
+    checkMagazine(magazine, note)
