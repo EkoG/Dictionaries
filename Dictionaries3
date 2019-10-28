@@ -1,0 +1,45 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#calculate combinations
+def nCr(n,r):                             #función auxiliar para calcular las combinaciones
+    f = math.factorial
+    return f(n) / f(r) / f(n-r)
+
+# Complete the sherlockAndAnagrams function below.
+def sherlockAndAnagrams(s):                      
+    d = {}
+    total = 0
+    for i in range(len(s)-1):             # Loops creados para generar sub strings para ver la cantidad de anagramas
+        for j in range(len(s)-i):         # Cada loop  j debe decresentar i porque es i más grande cada vez
+            text = ''.join(sorted (s[j : i + j + 1])) #string que va de un valor j hasta un valor j + i + 1 para realizar los substrings
+            if text in d:                 # para Saber si un substring es un anagrama, debe ordenarse y así ser comparado con los que ya fueron añadidos
+                d[text]  += 1
+            else:
+                d[text] = 1
+    for k in d:                           # calcula las combinaciones nC2 del diccionario donde n es las veces que se repite un substring en el diccionario
+        if d[k] > 1:
+            total += nCr(d[k], 2)
+    return int(total)
+        
+    
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        s = input()
+
+        result = sherlockAndAnagrams(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
