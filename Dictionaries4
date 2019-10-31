@@ -1,0 +1,35 @@
+#!/bin/python3
+from collections import defaultdict
+import math
+import os
+import random
+import re
+import sys
+
+def countTriplets(arr, r):   
+    d, d2 = defaultdict(int), defaultdict(int)                      #crear dos diccionarios, uno cuenta la frecuencia de los eventos
+    total = 0                                                       #el otro encuentra la parte de media del triplete y la cuenta
+    for i in reversed(arr): 
+        if (i * r) in d2:
+            total += d2[i * r]
+        if (i * r) in d:
+            d2[i] += d[i * r]
+        d[i] += 1
+    return total
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nr = input().rstrip().split()
+
+    n = int(nr[0])
+
+    r = int(nr[1])
+
+    arr = list(map(int, input().rstrip().split()))
+
+    ans = countTriplets(arr, r)
+
+    fptr.write(str(ans) + '\n')
+
+    fptr.close()
